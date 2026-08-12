@@ -1,0 +1,24 @@
+{
+  "recommended_threshold": 0.33,
+  "description_required_concepts": ["video_prompt", "timed_beats", "flux"],
+  "positive_concepts": {
+    "video_prompt": ["视频提示词", "导演提示词", "video prompt", "镜头提示词", "prompt"],
+    "timed_beats": ["20秒", "20 秒", "分镜", "二八法则", "80/20", "按秒", "节拍"],
+    "flux": ["FLUX 3", "BFL", "即梦", "Seedance", "首尾帧", "连续镜头"]
+  },
+  "negative_patterns": ["只生成一张图片", "剪映加字幕", "直接点击 Generate", "提交 API", "解释一下"],
+  "should_trigger": [
+    {"text": "按二八法则给我写一个 20 秒 FLUX 3 视频提示词", "family": "flux_timed"},
+    {"text": "把学习笔记改成即梦的连续镜头导演提示词", "family": "seedance_story"},
+    {"text": "给我的 GitHub 项目做六段按秒分拍的视频 prompt", "family": "project_story"}
+  ],
+  "should_not_trigger": [
+    {"text": "只生成一张图片封面", "family": "image_only"},
+    {"text": "把视频导入剪映加字幕", "family": "editing_only"},
+    {"text": "直接点击 Generate 并提交 API", "family": "submission"}
+  ],
+  "near_neighbor": [
+    {"text": "解释一下这个视频 prompt 是什么意思", "family": "explain_only"},
+    {"text": "给我一段一分钟的旁白", "family": "voiceover_only"}
+  ]
+}

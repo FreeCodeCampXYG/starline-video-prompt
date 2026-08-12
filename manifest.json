@@ -1,0 +1,24 @@
+{
+  "name": "starline-video-prompt",
+  "version": "1.1.0",
+  "owner": "澧点星痕 (starline)",
+  "author": {"name": "澧点星痕", "english_name": "starline"},
+  "updated_at": "2026-08-12",
+  "status": "active",
+  "maturity_tier": "production",
+  "lifecycle_stage": "production",
+  "context_budget_tier": "production",
+  "intent": {
+    "job_to_be_done": "Generate time-scored, continuity-aware video prompts for FLUX 3 and related AI video workflows.",
+    "target_users": ["AI video creators", "Starline operators"],
+    "inputs": ["topic or source notes", "target duration", "visual reference or continuity requirements", "platform constraints"],
+    "outputs": ["Chinese directing brief", "English paste-ready prompt", "parameter recommendation", "post-production evidence placeholders", "prompt validation result"],
+    "exclusions": ["provider submission", "browser automation", "account access", "video editing", "fabricated achievements"]
+  },
+  "upstream_inspiration": "Seedance 2.0 public tutorial supplied by user; local Starline FLUX Video Director skill",
+  "evidence": {
+    "prior_art_discovery": "missing evidence: local prior-art runner could not start its external command on Windows (WinError 2)",
+    "provider_backed_prompt_comparison": "missing evidence"
+  },
+  "release_gates": ["validate_skill", "trigger_eval", "export_skill_ir", "user_confirmed_prompt_limit", "local_prompt_validation"]
+}
