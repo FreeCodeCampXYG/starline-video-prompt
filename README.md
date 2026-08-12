@@ -1,5 +1,19 @@
 # Starline Video Prompt
 
+## Install with npx
+
+Install this skill for Codex, Claude Code, Cursor, and other supported agents:
+
+```bash
+npx skills add FreeCodeCampXYG/starline-video-prompt --skill starline-video-prompt --all
+```
+
+For a global user-level installation, add `--global`:
+
+```bash
+npx skills add FreeCodeCampXYG/starline-video-prompt --skill starline-video-prompt --all --global
+```
+
 为 FLUX 3、即梦/Seedance 风格工作流生成可直接使用的导演级视频提示词。它把“主题”拆成可控的镜头不变量和有节奏的可见事件，并把真实项目证据留给后期素材叠加。
 
 ## 适合的请求
@@ -38,7 +52,7 @@ python scripts/validate_prompt.py path/to/prompt.md --limit 10000 --confirmed-li
 
 将本目录放入本机 Skills 目录后，用 `$starline-video-prompt` 调用即可。若提示词超过平台上限，先压缩重复负面词和声音描述，保留人物/空间锁定、按秒节拍和稳定尾帧。该 Skill 借鉴了用户提供的 Seedance 2.0 教程的“先控参数、再控镜头、保留续接余量”思路。
 
-正式发布后的安装命令为 `npx skills add <published-package>`；当前是本地包，尚未发布。验证包结构可运行 `python C:\Users\xiaoy\.agents\skills\starline-meta-skill\scripts\validate_skill.py .`。
+Verify the package after installation with `npx skills list` or `npx skills list --global`. Validate its source structure with `python C:\Users\xiaoy\.agents\skills\starline-meta-skill\scripts\validate_skill.py .`.
 
 ## Troubleshooting
 
