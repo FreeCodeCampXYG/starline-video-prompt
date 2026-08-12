@@ -1,0 +1,20 @@
+interface:
+  display_name: "Starline Video Prompt"
+  author: "澧点星痕 (starline)"
+  short_description: "生成二八结构、按秒分拍的 FLUX 3 视频导演提示词"
+  default_prompt: "Use $starline-video-prompt to turn my topic into a 20-second FLUX 3-ready cinematic prompt. Use an 80/20 invariant-to-event structure, specify visible timed beats and a stable end frame, and reserve factual claims for later real-screenshot overlays."
+  examples:
+    - "按二八法则给我的 AI 学习复盘写一段 20 秒 FLUX 3 视频提示词"
+    - "把这份 GitHub 项目说明拆成六段连续的英文导演提示词"
+    - "设计一个即梦/Seedance 风格的快速技术纪录片镜头，不要慢镜头"
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets: ["openai", "claude", "generic", "agent-skills-compatible"]
+  execution:
+    runtime: "python>=3.10 optional"
+  permissions:
+    network: "none"
+    file_write: "only local prompt artifacts when explicitly requested"
+    secret: "none"
+  degradation:
+    no_reference_media: "write a character and scene bible, and label identity consistency as unverified"

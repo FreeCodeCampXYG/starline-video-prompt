@@ -1,0 +1,131 @@
+{
+  "schema_version": "2.0.0-starline-lite",
+  "generated_at": "2026-08-12",
+  "package": {
+    "name": "starline-video-prompt",
+    "version": "1.1.0",
+    "owner": "澧点星痕 (starline)",
+    "maturity_tier": "production",
+    "lifecycle_stage": "production",
+    "upstream_inspiration": "Seedance 2.0 public tutorial supplied by user; local Starline FLUX Video Director skill",
+    "upstream_sync": {}
+  },
+  "intent": {
+    "description": "Create director-grade, BFL FLUX 3-ready video prompts and multi-shot prompt packs for 5-20 second clips. Use when the user asks for 视频提示词, 导演级提示词, 20秒镜头提示词, FLUX 3 prompt, 即梦/Seedance 镜头设计, 二八法则分镜提示词, 首尾帧连续提示词, or wants to turn a topic, study notes, STAR story, project achievements, or storyboard into timed cinematic prompts. Do not use for browser clicking, API submission, video downloading, or ordinary editing-only tasks.",
+    "job_to_be_done": "Generate time-scored, continuity-aware video prompts for FLUX 3 and related AI video workflows.",
+    "target_users": [
+      "AI video creators",
+      "Starline operators"
+    ],
+    "inputs": [
+      "topic or source notes",
+      "target duration",
+      "visual reference or continuity requirements",
+      "platform constraints"
+    ],
+    "outputs": [
+      "Chinese directing brief",
+      "English paste-ready prompt",
+      "parameter recommendation",
+      "post-production evidence placeholders",
+      "prompt validation result"
+    ],
+    "exclusions": [
+      "provider submission",
+      "browser automation",
+      "account access",
+      "video editing",
+      "fabricated achievements"
+    ],
+    "starline_defaults": {},
+    "naming": {}
+  },
+  "triggers": {
+    "should_trigger": [
+      "按二八法则给我写一个 20 秒 FLUX 3 视频提示词",
+      "把学习笔记改成即梦的连续镜头导演提示词",
+      "给我的 GitHub 项目做六段按秒分拍的视频 prompt"
+    ],
+    "should_not_trigger": [
+      "只生成一张图片封面",
+      "把视频导入剪映加字幕",
+      "直接点击 Generate 并提交 API"
+    ],
+    "near_neighbor": [
+      "解释一下这个视频 prompt 是什么意思",
+      "给我一段一分钟的旁白"
+    ]
+  },
+  "workflow": {
+    "router_rules": [
+      "先确认目标是单镜头、连续多镜头，还是剪辑用的关键视觉素材。",
+      "优先读取用户提供的笔记、项目说明、脚本或画面参考；没有来源时，明确把事实性成果留给后期真实截图，不在生成画面里虚构。",
+      "需要真实 BFL 生成、Playground 自动填写、末帧提取或断点续跑时，转交 `$starline-flux-video-director`；本 Skill 只产出提示词与审查结果。",
+      "纯图片封面、已有成片剪辑、旁白润色，不触发本 Skill。"
+    ],
+    "compact_workflow": [
+      "定义一句话视觉命题：观众要在画面中看见的变化，而非主题口号。",
+      "区分 20% 不变量与 80% 可见事件：不变量锁定人物、服装、空间、光线、镜头方向；事件按秒写清可见因果。",
+      "选择时长：5-8 秒只容纳一个动作；10 秒容纳 2-3 个节拍；20 秒容纳 4-6 个节拍且首秒必须发生事件。",
+      "先让用户确认目标平台的提示词字符上限；未确认时，提供正常密度草案并明确标注“待确认上限”，不得擅自按 10,000 字符或任何其他上限扩写。确认后才决定精简版或接近上限的长版。",
+      "写成英文生成提示词：结构为 `intent → invariants → camera → object physics → timed score → end frame → negatives`。生成画面不要求可读文字、真实 UI、GitHub 页面或字幕。",
+      "连续多镜头时，把上一镜尾帧的构图、人物位置、光向、镜头方向、道具状态写成下一镜的起始锁定；相邻镜头一次只改变一个连续性变量。",
+      "输出中文导演说明、英文可粘贴 Prompt、时长/参数建议、后期替换位与负面约束。若适用，运行 `scripts/validate_prompt.py --limit <用户确认值> --confirmed-limit` 检查长度与结构。"
+    ],
+    "gate_ladder": [],
+    "output_contract": [
+      "`视觉命题`：一句中文。",
+      "`镜头设计`：时长、节拍表、镜头运动和尾帧用途。",
+      "`English prompt`：可直接粘贴；必须标明“上限：用户确认 N 字符”或“上限待确认”，不得把假定值伪装成平台事实。",
+      "`参数建议`：模式、时长、画幅、分辨率、音频与安全级别；不含密钥。",
+      "`后期真实素材位`：何处替换为真实 GitHub、学习站或字幕。",
+      "`负面约束`：只保留和该镜头失败模式有关的约束。"
+    ]
+  },
+  "resources": {
+    "references": [
+      "references\\prompt-system.md"
+    ],
+    "scripts": [
+      "scripts\\validate_prompt.py"
+    ],
+    "evals": [
+      "evals\\trigger_cases.json"
+    ],
+    "reports": [
+      "reports\\creation-handoff.md",
+      "reports\\prior-art-research.md",
+      "reports\\skill-ir.json",
+      "reports\\trigger-eval.json"
+    ]
+  },
+  "portability": {
+    "canonical_format": "agent-skills",
+    "adapter_targets": [
+      "openai",
+      "claude",
+      "generic",
+      "agent-skills-compatible"
+    ],
+    "activation": {},
+    "execution": {
+      "runtime": "python>=3.10 optional"
+    },
+    "trust": {},
+    "permissions": {
+      "network": "none",
+      "file_write": "only local prompt artifacts when explicitly requested",
+      "secret": "none"
+    },
+    "degradation": {
+      "no_reference_media": "write a character and scene bible, and label identity consistency as unverified"
+    }
+  },
+  "gates": {},
+  "evidence_boundary": {
+    "generated_reports_are_evidence": true,
+    "planned_work_is_evidence": false,
+    "missing_external_or_human_evidence_label": "missing evidence",
+    "public_claim_policy": "claim only what local validation, install proof, human review, or provider-backed evidence actually supports"
+  }
+}

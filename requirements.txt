@@ -1,0 +1,2 @@
+# This skill's validate_prompt.py uses only the Python standard library.
+# Kept intentionally empty so `pip install -r requirements.txt` is safe.

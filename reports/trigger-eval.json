@@ -1,0 +1,118 @@
+{
+  "ok": true,
+  "threshold": 0.33,
+  "description_concepts": [
+    "flux",
+    "timed_beats",
+    "video_prompt"
+  ],
+  "missing_description_concepts": [],
+  "summary": {
+    "total": 8,
+    "passed": 8,
+    "false_positive": 0,
+    "false_negative": 0,
+    "pass_rate": 1.0
+  },
+  "failures": [],
+  "results": {
+    "should_trigger": [
+      {
+        "prompt": "按二八法则给我写一个 20 秒 FLUX 3 视频提示词",
+        "family": "flux_timed",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "flux",
+          "timed_beats",
+          "video_prompt"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "把学习笔记改成即梦的连续镜头导演提示词",
+        "family": "seedance_story",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "flux",
+          "video_prompt"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "给我的 GitHub 项目做六段按秒分拍的视频 prompt",
+        "family": "project_story",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.667,
+        "matched_concepts": [
+          "timed_beats",
+          "video_prompt"
+        ],
+        "negative_pattern": null
+      }
+    ],
+    "should_not_trigger": [
+      {
+        "prompt": "只生成一张图片封面",
+        "family": "image_only",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": "只生成一张图片"
+      },
+      {
+        "prompt": "把视频导入剪映加字幕",
+        "family": "editing_only",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": "剪映加字幕"
+      },
+      {
+        "prompt": "直接点击 Generate 并提交 API",
+        "family": "submission",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": "直接点击 Generate"
+      }
+    ],
+    "near_neighbor": [
+      {
+        "prompt": "解释一下这个视频 prompt 是什么意思",
+        "family": "explain_only",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.333,
+        "matched_concepts": [
+          "video_prompt"
+        ],
+        "negative_pattern": "解释一下"
+      },
+      {
+        "prompt": "给我一段一分钟的旁白",
+        "family": "voiceover_only",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": null
+      }
+    ]
+  }
+}
