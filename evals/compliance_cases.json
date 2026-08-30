@@ -1,0 +1,9 @@
+{
+  "description": "投稿规则与故事成稿边界样例，供人工复核和后续自动化扩展",
+  "cases": [
+    {"text": "60秒开场样片，不能标成系列剧最终单集", "expected": "warn_duration"},
+    {"text": "未通电开发板、绝缘工具、低压受保护信号，不展示人体导电", "expected": "safe_electrical_rewrite"},
+    {"text": "片尾只留主题字幕，不放链接、二维码、联系方式或广告", "expected": "no_promotion"},
+    {"text": "真实开发板照片只负责道具形状与接口，人物参考图只负责身份", "expected": "reference_responsibility"}
+  ]
+}

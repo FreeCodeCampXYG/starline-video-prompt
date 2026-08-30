@@ -1,17 +1,17 @@
 {
   "schema_version": "2.0.0-starline-lite",
-  "generated_at": "2026-08-12",
+  "generated_at": "2026-08-30",
   "package": {
     "name": "starline-video-prompt",
-    "version": "1.1.0",
-    "owner": "澧点星痕 (starline)",
+    "version": "1.4.0",
+    "owner": "墨点星痕 (starline)",
     "maturity_tier": "production",
     "lifecycle_stage": "production",
-    "upstream_inspiration": "Seedance 2.0 public tutorial supplied by user; local Starline FLUX Video Director skill",
+    "upstream_inspiration": "SoloEnt-AI/5min-drama-contest (staged story locking and opening/ending payoff); AAAAAAJ/asset-photorealism-lighting-optimizer (reference responsibilities, light-source causality, material evidence); AAAAAAJ/ai-film-general-skill (task/input gates, four-section video output, granularity and review order); user-supplied Seedance directing materials; local Starline FLUX Video Director skill",
     "upstream_sync": {}
   },
   "intent": {
-    "description": "Create director-grade, BFL FLUX 3-ready video prompts and multi-shot prompt packs for 5-20 second clips. Use when the user asks for 视频提示词, 导演级提示词, 20秒镜头提示词, FLUX 3 prompt, 即梦/Seedance 镜头设计, 二八法则分镜提示词, 首尾帧连续提示词, or wants to turn a topic, study notes, STAR story, project achievements, or storyboard into timed cinematic prompts. Do not use for browser clicking, API submission, video downloading, or ordinary editing-only tasks.",
+    "description": "Create director-grade BFL FLUX 3 and Seedance-ready prompts, performance beats, and multi-shot prompt packs for 5-20 second clips. Use when the user asks for 视频提示词, 导演级提示词, 角色演技, 好莱坞分镜, 复古科幻/太空史诗, FLUX 3 prompt, 即梦/Seedance 镜头设计, 首尾帧连续提示词, or wants to turn a topic, study notes, project achievements, or story into timed cinematic scenes. Do not use for browser clicking, API submission, video downloading, or ordinary editing-only tasks.",
     "job_to_be_done": "Generate time-scored, continuity-aware video prompts for FLUX 3 and related AI video workflows.",
     "target_users": [
       "AI video creators",
@@ -60,40 +60,53 @@
     "router_rules": [
       "先确认目标是单镜头、连续多镜头，还是剪辑用的关键视觉素材。",
       "优先读取用户提供的笔记、项目说明、脚本或画面参考；没有来源时，明确把事实性成果留给后期真实截图，不在生成画面里虚构。",
+      "用户引用教程、文章或电影案例时，先读取原文；只迁移有效镜头的控制语法（运镜、动作、灯光、声音、物理），不要整段复制其人物、场景或剧情。",
+      "用户提到比赛投稿、审核、封面、文件大小或违规规则时，先读取 `references/submission-compliance.md`；把它作为交付门禁，不把规则清单写进故事正文。",
       "需要真实 BFL 生成、Playground 自动填写、末帧提取或断点续跑时，转交 `$starline-flux-video-director`；本 Skill 只产出提示词与审查结果。",
       "纯图片封面、已有成片剪辑、旁白润色，不触发本 Skill。"
     ],
     "compact_workflow": [
-      "定义一句话视觉命题：观众要在画面中看见的变化，而非主题口号。",
-      "区分 20% 不变量与 80% 可见事件：不变量锁定人物、服装、空间、光线、镜头方向；事件按秒写清可见因果。",
-      "选择时长：5-8 秒只容纳一个动作；10 秒容纳 2-3 个节拍；20 秒容纳 4-6 个节拍且首秒必须发生事件。",
+      "写一句电影命题：观众要看见谁因为什么付出什么代价并发生什么改变，而非主题口号或工具清单。",
+      "建立故事因果骨架：可见危机、人物使命、关键选择、带代价且可验证的结果。只把它用于内部推演，不在成稿中输出方法标签。",
+      "先锁定少量防漂移变量：人物身份与服装、空间几何、主光方向、镜头轴、关键道具材质；其余篇幅写按秒发生的触发、反应、选择和物理后果。",
+      "先写角色欲望、阻力和转折，再写“演技”。情绪必须拆为 `刺激 → 短暂停顿 → 试图压住 → 细节泄露 → 决策动作/失守`；每个节拍只选 2-4 个眼神、面部、手部、呼吸或重心细节，避免整张脸同时表演。",
+      "为每个镜头建立 `FIRST FRAME / CHARACTER / POSITION / CAMERA / ACTION / PHYSICS / LIGHTING / CONTINUITY / AUDIO / TECHNICAL` 控制项；只写当前镜头真正需要的项，但必须明确“必须出现”与“绝对不能变”。详见 `references/cinematic-performance-system.md`。",
+      "选择时长：5-8 秒只容纳一个动作；10 秒容纳 2-3 个节拍；20 秒容纳 4-6 个节拍且首秒必须发生事件。大规模场面仍只保留一个主因果事件，不能靠增加飞船、爆炸或粒子代替叙事。",
       "先让用户确认目标平台的提示词字符上限；未确认时，提供正常密度草案并明确标注“待确认上限”，不得擅自按 10,000 字符或任何其他上限扩写。确认后才决定精简版或接近上限的长版。",
-      "写成英文生成提示词：结构为 `intent → invariants → camera → object physics → timed score → end frame → negatives`。生成画面不要求可读文字、真实 UI、GitHub 页面或字幕。",
-      "连续多镜头时，把上一镜尾帧的构图、人物位置、光向、镜头方向、道具状态写成下一镜的起始锁定；相邻镜头一次只改变一个连续性变量。",
+      "写成英文生成提示词：结构为 `dramatic intent → invariants → first-frame blocking → camera → performance → physics → timed score → end frame → negatives`。生成画面不要求可读文字、真实 UI、GitHub 页面或字幕。",
+      "连续多镜头时，把上一镜尾帧的构图、人物位置、视线目标、光向、镜头轴、道具状态写成下一镜的起始锁定；相邻镜头一次只改变一个连续性变量。",
       "输出中文导演说明、英文可粘贴 Prompt、时长/参数建议、后期替换位与负面约束。若适用，运行 `scripts/validate_prompt.py --limit <用户确认值> --confirmed-limit` 检查长度与结构。"
     ],
     "gate_ladder": [],
     "output_contract": [
       "`视觉命题`：一句中文。",
-      "`镜头设计`：时长、节拍表、镜头运动和尾帧用途。",
+      "`故事因果骨架`：危机、使命、关键行动和带代价结果；成稿默认不显示内部框架名。",
+      "`角色表演弧`：刺激、压抑、泄露、选择和动作余韵。",
+      "`镜头设计`：时长、节拍表、场面调度、镜头运动和尾帧用途。",
       "`English prompt`：可直接粘贴；必须标明“上限：用户确认 N 字符”或“上限待确认”，不得把假定值伪装成平台事实。",
       "`参数建议`：模式、时长、画幅、分辨率、音频与安全级别；不含密钥。",
-      "`后期真实素材位`：何处替换为真实 GitHub、学习站或字幕。",
-      "`负面约束`：只保留和该镜头失败模式有关的约束。"
+      "`参考素材职责`：每张参考图/视频分别负责身份、服装、场景几何、运镜或动作中的哪一项；无参考素材时标记一致性风险。",
+      "`后期真实素材位` 与 `负面约束`。",
+      "`方法论隐形检查`：成稿正文默认不泄露内部框架名、比例名或阶段名，改用故事内容和可拍动作表达。"
     ]
   },
   "resources": {
     "references": [
-      "references\\prompt-system.md"
+      "references\\cinematic-performance-system.md",
+      "references\\prompt-system.md",
+      "references\\story-and-lighting-contract.md",
+      "references\\submission-compliance.md"
     ],
     "scripts": [
       "scripts\\validate_prompt.py"
     ],
     "evals": [
+      "evals\\compliance_cases.json",
       "evals\\trigger_cases.json"
     ],
     "reports": [
       "reports\\creation-handoff.md",
+      "reports\\prior-art-research-20260830.md",
       "reports\\prior-art-research.md",
       "reports\\skill-ir.json",
       "reports\\trigger-eval.json"

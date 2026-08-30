@@ -20,6 +20,11 @@ def main() -> None:
     parser.add_argument("--limit", type=int, required=True, help="用户已确认的平台字符上限")
     parser.add_argument("--confirmed-limit", action="store_true", help="确认 --limit 来自用户或当前平台页面，而非默认猜测")
     parser.add_argument("--require-timed-score", action="store_true")
+    parser.add_argument(
+        "--story-facing",
+        action="store_true",
+        help="故事成稿模式：禁止内部框架标签泄露到正文",
+    )
     args = parser.parse_args()
     if not args.confirmed_limit:
         raise SystemExit("请先由用户确认提示词字符上限，再传入 --limit <N> --confirmed-limit")
@@ -39,6 +44,11 @@ def main() -> None:
                 failures.append(f"缺少 20 秒镜头必要结构：{marker}")
         if not any(marker in lower for marker in ("end frame", "continuity frame", "final frame")):
             failures.append("缺少 20 秒镜头必要结构：稳定尾帧契约")
+    if args.story_facing:
+        forbidden = ("STAR", "80/20", "20%", "核心20%", "核心 20%")
+        leaked = [marker for marker in forbidden if marker.lower() in body.lower()]
+        if leaked:
+            failures.append("故事成稿不应出现内部方法标签：" + ", ".join(leaked))
     print(f"prompt_chars={len(body)} limit={args.limit}")
     if failures:
         for failure in failures:
