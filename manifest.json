@@ -1,6 +1,6 @@
 {
   "name": "starline-video-prompt",
-  "version": "1.4.0",
+  "version": "1.4.2",
   "owner": "墨点星痕 (starline)",
   "author": {"name": "墨点星痕", "english_name": "starline"},
   "updated_at": "2026-08-30",
@@ -15,11 +15,13 @@
     "outputs": ["Chinese directing brief", "English paste-ready prompt", "parameter recommendation", "post-production evidence placeholders", "prompt validation result"],
     "exclusions": ["provider submission", "browser automation", "account access", "video editing", "fabricated achievements"]
   },
-  "upstream_inspiration": "SoloEnt-AI/5min-drama-contest (staged story locking and opening/ending payoff); AAAAAAJ/asset-photorealism-lighting-optimizer (reference responsibilities, light-source causality, material evidence); AAAAAAJ/ai-film-general-skill (task/input gates, four-section video output, granularity and review order); user-supplied Seedance directing materials; local Starline FLUX Video Director skill",
+  "upstream_inspiration": "SoloEnt-AI/5min-drama-contest (staged story locking and opening/ending payoff); AAAAAAJ/asset-photorealism-lighting-optimizer (reference responsibilities, light-source causality, material evidence); AAAAAAJ/ai-film-general-skill (task/input gates, four-section video output, granularity and review order); user-provided photoreal portrait course and Wan2.7 portrait template (natural skin and face controls); user-supplied Seedance directing materials; local Starline FLUX Video Director skill",
   "evidence": {
     "prior_art_discovery": "missing evidence: local prior-art runner could not start its external command on Windows (WinError 2)",
     "provider_backed_prompt_comparison": "missing evidence",
-    "upstream_runtime_validation": "missing evidence: adopted mechanisms were reviewed from public source files; no provider generation comparison was run"
+    "upstream_runtime_validation": "missing evidence: adopted mechanisms were reviewed from public source files; no provider generation comparison was run",
+    "seedance_prompt_limit": "user-confirmed 5000 characters on 2026-08-30; recheck if the current platform interface differs",
+    "human_photorealism": "design evidence from user-provided reference materials; provider-backed identity consistency and visual realism remain missing evidence"
   },
   "release_gates": ["validate_skill", "trigger_eval", "export_skill_ir", "user_confirmed_prompt_limit", "local_prompt_validation"]
 }

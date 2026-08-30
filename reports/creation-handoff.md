@@ -2,7 +2,7 @@
 
 ## Result
 
-- `starline-video-prompt` v1.4.0
+- `starline-video-prompt` v1.4.2
 - Job: create time-scored, continuity-aware, FLUX 3-ready director prompts without submitting provider jobs.
 - Status: local production package; not published.
 
@@ -12,6 +12,7 @@
 - `SoloEnt-AI/5min-drama-contest`: adapted staged story locking, opening/ending payoff, four-part causal escalation, and storyboard field discipline.
 - `AAAAAAJ/asset-photorealism-lighting-optimizer`: adapted reference-image responsibility boundaries, light-source causality, material/contact/scale evidence, and full-prompt revision discipline.
 - `AAAAAAJ/ai-film-general-skill`: adapted task/input gates, four-section video output, independent prompt granularity, and structure-first review order.
+- User-provided photoreal portrait course and Wan2.7 portrait template: adapted physical skin description, facial-structure controls, source-based lighting and the distinction between stable character assets and intentional narrative snapshots.
 - User-supplied Seedance 2.0 tutorial: adopted parameter-first, controllable, extensible-shot framing. External catalog candidates are missing evidence because discovery could not run.
 
 ## Keep / adapt / reject / invent
@@ -22,11 +23,12 @@
 - Invent: a local validator that checks paste-limit and timed-score markers without requiring credentials or network access.
 - Invent: a story-facing output gate that keeps internal framework labels out of plot, dialogue, and shot prose unless teaching mode is explicitly requested.
 - Invent: a submission-compliance gate that separates final-entry requirements from teaser/sample status and rewrites hazardous electrical beats into non-instructional, non-graphic visuals.
+- Invent: a human-photorealism contract that protects adult original identity and video continuity while rejecting sexualized, low-detail or blur-dependent shortcuts.
 
 ## Advantages and evidence
 
 - [design advantage] Separates factual project evidence from generated imagery through explicit post-production placeholders.
-- [validated advantage] Local validator checks the 10,000-character constraint and required timed structure.
+- [validated advantage] Local validator checks the user-confirmed Seedance 5000-character constraint and required timed structure.
 - [hypothesis] The 80/20 template is expected to reduce slow, static generations; provider-backed comparison is missing evidence.
 
 ## Verification and limits

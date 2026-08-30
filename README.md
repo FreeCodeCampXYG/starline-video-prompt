@@ -43,16 +43,18 @@ npx skills add FreeCodeCampXYG/starline-video-prompt --skill starline-video-prom
 要求 Python 3.10+。校验脚本只使用标准库；`requirements.txt` 保留为空依赖说明文件，无需安装第三方包。
 
 ```powershell
-python scripts/validate_prompt.py path/to/prompt.md --limit 10000 --confirmed-limit --require-timed-score
+python scripts/validate_prompt.py path/to/prompt.md --limit 5000 --confirmed-limit --require-timed-score
 ```
 
-该检查只验证长度、结构和可选的故事成稿禁泄露规则，不能代替 BFL 生成结果或人工审片。
+Seedance 当前按用户确认的 5000 字符上限检查；若平台界面更新，以当前界面为准。该检查只验证长度、结构和可选的故事成稿禁泄露规则，不能代替 BFL 生成结果或人工审片。
 
 本版本吸收并改写了 [SoloEnt-AI/5min-drama-contest](https://github.com/SoloEnt-AI/5min-drama-contest) 的阶段锁定、开场承诺/结尾兑现和四段因果推进，以及 [AAAAAAAJ/asset-photorealism-lighting-optimizer](https://github.com/AAAAAAAJ/asset-photorealism-lighting-optimizer) 的参考图职责、光源因果链和材质证据规则；未复制其专属剧情或平台流程。
 
 同时借鉴 [AAAAAAAJ/ai-film-general-skill](https://github.com/AAAAAAAJ/ai-film-general-skill) 的输入闸门、四段式视频出口、提示词独立颗粒度和按结构到光声质感的审片顺序；比赛投稿禁限规则沉淀在 `references/submission-compliance.md`。
 
-Upstream inspiration: SoloEnt-AI/5min-drama-contest (staged story locking and opening/ending payoff); AAAAAAJ/asset-photorealism-lighting-optimizer (reference responsibilities, light-source causality, material evidence); AAAAAAJ/ai-film-general-skill (task/input gates, four-section video output, granularity and review order); user-supplied Seedance directing materials; local Starline FLUX Video Director skill
+人物首图与视频首帧可按 `references/human-photorealism-contract.md` 建立：先锁原创成年角色的脸部结构、自然皮肤、发型、服装、单一主光和道具接触，再扩展到剧情抓拍或连续视频。
+
+Upstream inspiration: SoloEnt-AI/5min-drama-contest (staged story locking and opening/ending payoff); AAAAAAJ/asset-photorealism-lighting-optimizer (reference responsibilities, light-source causality, material evidence); AAAAAAJ/ai-film-general-skill (task/input gates, four-section video output, granularity and review order); user-provided photoreal portrait course and Wan2.7 portrait template (natural skin and face controls); user-supplied Seedance directing materials; local Starline FLUX Video Director skill
 
 ## 安装与排障
 
