@@ -4,6 +4,7 @@
     {"text": "60秒开场样片，不能标成系列剧最终单集", "expected": "warn_duration"},
     {"text": "未通电开发板、绝缘工具、低压受保护信号，不展示人体导电", "expected": "safe_electrical_rewrite"},
     {"text": "片尾只留主题字幕，不放链接、二维码、联系方式或广告", "expected": "no_promotion"},
-    {"text": "真实开发板照片只负责道具形状与接口，人物参考图只负责身份", "expected": "reference_responsibility"}
+    {"text": "真实开发板照片只负责道具形状与接口，人物参考图只负责身份", "expected": "reference_responsibility"},
+    {"text": "成年原创角色的首图清晰对焦，保留自然肤质和单一窗光，不模仿现实公众人物", "expected": "safe_human_photorealism"}
   ]
 }
